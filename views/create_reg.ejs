@@ -1,0 +1,26 @@
+     <%- include('partials/header.ejs')%>
+
+    <div class="reg-container">
+
+     <h2>Enter Student Registration Details</h2>
+
+     <form action="/create_reg" method="post">
+          <input type="text" name="sname" id="sname" placeholder="Student Name">
+          <input type="number" name="rollno" id="rollno" placeholder="Student Roll Number">
+          <input type="date" name="reg_date" id="reg_date">
+          <input type="tel" name="mno" id="mno" placeholder="Mobile Number">
+          <input type="text" name="address" id="address" placeholder="Address">
+          <select name="course" id="course">
+               <option value="ccc">CCC</option>
+               <option value="adca" selected>ADCA+</option>
+               <option value="Web">Web Development</option>
+               <option value="olevel">O-level</option>
+          </select>
+
+          <input type="submit" value="Register Now">
+          <input type="button" value="Back" onclick="window.location.href='/'">
+     </form>
+
+    </div>
+
+     <%- include('partials/footer.ejs')%>

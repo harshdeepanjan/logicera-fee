@@ -1,0 +1,33 @@
+<%- include('partials/header.ejs') %>
+
+<div id="fee-form-container">
+
+    <h2 id="form-title">💰 Collect Fee</h2>
+
+    <form id="fee-form" action="/collect-fee/<%= student._id %>" method="post">
+
+        <div class="form-group">
+            <label for="feeDate">Fee Date</label>
+            <input type="date" name="feeDate" id="feeDate" required>
+        </div>
+
+        <div class="form-group">
+            <label for="feeAmount">Fee Amount</label>
+            <input type="number" name="feeAmount" id="feeAmount" placeholder="Enter amount" required>
+        </div>
+
+        <div class="form-group">
+            <label for="comment">Description</label>
+            <input type="text" name="comment" id="comment" placeholder="Write description">
+        </div>
+
+        <div id="form-actions">
+            <button type="submit" class="btn primary">Collect Fee</button>
+            <button type="button" class="btn secondary" onclick="window.location.href='/'">Back</button>
+        </div>
+
+    </form>
+
+</div>
+
+<%- include('partials/footer.ejs') %>

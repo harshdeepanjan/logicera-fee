@@ -1,0 +1,107 @@
+<%- include('partials/header.ejs')%>
+
+<div id="dashboard-container">
+
+    <!-- TOP ACTION BAR -->
+    <div id="top-actions">
+        <button class="action-btn primary" onclick="window.location.href='/create_reg'">+ Create Registration</button>
+        <button class="action-btn secondary" onclick="window.location.href='/past-student'">Archive Students</button>
+        <button class="action-btn secondary" onclick="window.location.href='/defaulter-list'">Defaulter List</button>
+        <button class="action-btn secondary" onclick="window.location.href='/check-fee'">Check Fee</button>
+    </div>
+
+    <form action="/" method="get">
+        <input type="text" name="q" id="search" placeholder="Search By student">
+        <input type="submit" value="Search Now">
+    </form>
+
+    <!-- TABLE -->
+    <div id="table-wrapper">
+        <table id="student-table">
+
+            <thead>
+                <tr>
+                    <th>S.No.</th>
+                    <th>Roll No.</th>
+                    <th>Student Name</th>
+                    <th>Course</th>
+                    <th>Total Fee</th>
+                    <th>Phone</th>
+                    <th>Fee</th>
+                    <th>Details</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+
+                    <tbody>
+                        <% student.forEach(element => { %>
+                            <tr class="student-row">
+
+                        <td><%= pagingCounter++ %></td>
+                        <td class="roll"> <%= element.rollno %> </td>
+                        <td class="name"><%= element.sname %></td>
+                        <td class="course"><%= element.course %></td>
+
+                        <td class="fee">
+                            <% let total = 0;
+                               element.fees.forEach(f => { 
+                                total += f.feeAmount }); %>
+                            ₹ <%= total %>
+                        </td>
+
+                        <td class="phone"><%= element.mno %></td>
+
+                        <td>
+                            <button class="btn small primary" onclick="window.location.href='/collect-fee/<%= element._id %>'">
+                                Collect
+                            </button>
+                        </td>
+
+                        <td>
+                            <button class="btn small success" onclick="window.location.href='/fee-detail/<%= element._id %>'">
+                                View
+                            </button>
+                        </td>
+
+                        <td class="actions">
+                            <a href="/view-student/<%=element._id %>" class="icon view"><i class="fa-solid fa-eye"></i></a>
+                            <a href="/edit-student/<%=element._id %>" class="icon edit"><i class="fa-solid fa-pen-to-square"></i></a>
+                            <a href="/archieve-btn/<%=element._id %>" class="icon archive"><i class="fa-solid fa-box-archive"></i></a>
+                            <a href="/delete-student/<%= element._id %>" class="icon delete"><i class="fa-solid fa-trash"></i></a>
+                        </td>
+
+                    </tr>
+                <% }); %>
+            </tbody>
+
+        </table>
+
+        <nav aria-label="...">
+  <ul class="pagination">
+    
+    <!-- condition 1 -->
+     <% let disabledClass1 = hasPrevPage? "" : "disabled" %>
+
+    <li class="page-item <%= disabledClass1%>">
+      <a class="page-link" href="/?page=<%= prevPage %>" tabindex="-1">Previous</a>
+    </li>
+
+    <% for(let i=1; i<=totalPages; i++) { %>
+        <% let currentClass = currentPage == i ? "active" : "" %>
+    <li class="page-item <%= currentClass %>"><a class="page-link" href="/?page=<%= i%>"> <%= i%> </a></li>
+    <% } %>
+
+     <% let disabledClass2 = hasNextPage? "" : "disabled" %>
+    <li class="page-item <%= disabledClass2 %>">
+      <a class="page-link" href="/?page=<%= nextPage %>">Next</a>
+    </li>
+
+</ul>
+</nav>
+
+
+    </div>
+
+</div>
+
+<%- include('partials/footer.ejs')%>

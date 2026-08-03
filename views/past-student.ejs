@@ -1,0 +1,96 @@
+<%- include('partials/header.ejs')%>
+
+<div id="archive-container">
+
+    <h1 id="archive-title">📦 All Past Student Data</h1>
+
+    <div id="archive-top">
+        <button id="show-archieve" onclick="window.location.href='/'">
+            ⬅ Go to Homepage
+        </button>
+    </div>
+
+    <div id="archive-table-wrapper">
+
+        <table id="archive-table">
+
+            <thead>
+                <tr>
+                    <th>S.No.</th>
+                    <th>Roll No.</th>
+                    <th>Student Name</th>
+                    <th>Course</th>
+                    <th>Total Fee</th>
+                    <th>Phone</th>
+                    <th>Fee Collection</th>
+                    <th>Fee Details</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                <% var sno = 1; %>
+
+                <% student.forEach(function(element){ %>
+
+                    <% var total = 0; %>
+
+                    <% if(element.fees){ %>
+                        <% element.fees.forEach(function(f){ %>
+                            <% total = total + f.feeAmount; %>
+                        <% }); %>
+                    <% } %>
+
+                    <tr class="archive-row">
+
+                        <td><%= sno %></td>
+                        <td><%= element.rollNumber %></td>
+                        <td class="name"><%= element.sname %></td>
+                        <td><%= element.course %></td>
+
+                        <td class="fee">₹ <%= total %></td>
+
+                        <td><%= element.mno %></td>
+
+                        <td>
+                            <button class="btn small">Collect Fee</button>
+                        </td>
+
+                        <td>
+                            <button class="btn small">Fee Details</button>
+                        </td>
+
+                        <td class="actions">
+                            <a href="/view-student/<%=element._id %>" class="icon view">
+                                <i class="fa-solid fa-eye"></i>
+                            </a>
+
+                            <a href="/edit-student/<%=element._id %>" class="icon edit">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </a>
+
+                            <a href="/unarchieve-btn/<%=element._id %>" class="icon restore">
+                                <i class="fa-solid fa-rotate-left"></i>
+                            </a>
+
+                            <a href="/delete-student/<%= element._id %>" class="icon delete">
+                                <i class="fa-solid fa-trash"></i>
+                            </a>
+                        </td>
+
+                    </tr>
+
+                    <% sno = sno + 1; %>
+
+                <% }); %>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+<%- include('partials/footer.ejs')%>

@@ -1,0 +1,50 @@
+<%- include('partials/header.ejs') %>
+
+<div id="student-profile">
+
+    <div id="student-info">
+        <p class="info-item"><span class="label">Student Name:</span> <%= student.sname %></p>
+        <p class="info-item"><span class="label">Roll Number: </span> 123478 </p>
+        <p class="info-item"><span class="label">Course:</span> <%= student.course %></p>
+    </div>
+
+    <div id="fee-section">
+        <table id="fee-table">
+
+            <thead>
+                <tr>
+                    <th>Sno.</th>
+                    <th>Fee Date</th>
+                    <th>Fee Amount</th>
+                    <th>Comment</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <% let total = 0;
+                    let sno = 1 %>
+                <% student.fees.forEach(element => { %>
+                    <% total += element.feeAmount %>
+                    <tr class="fee-row"> 
+                        <td> <%= sno++ %> </td>
+                        <td class="fee-date"><%= dayjs(element.feeDate).format("DD-MMMM-YYYY") %></td>
+                        <td class="fee-amount">₹ <%= element.feeAmount %></td>
+                        <td class="fee-comment"><%= element.comment %></td>
+                    </tr>
+                <% }); %>
+            </tbody>
+
+            <tfoot>
+                <tr id="total-row">
+                    <td></td>
+                    <td class="total-label">Total Fee</td>
+                    <td colspan="2" class="total-value">₹ <%= total %></td>
+                </tr>
+            </tfoot>
+
+        </table>
+    </div>
+
+</div>
+
+<%- include('partials/footer.ejs') %>

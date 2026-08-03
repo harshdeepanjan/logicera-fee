@@ -1,0 +1,36 @@
+<%- include('partials/header.ejs') %>
+
+  <h1 style="text-align: center;">Student Information</h1>
+
+  <table>
+    <thead>
+        <th>Student Info</th>
+        <th>Dscription</th>
+    </thead>
+
+    <tbody>
+        <tr>
+            <td>Name</td>
+            <td> <%= student.sname  %> </td>
+        </tr>
+
+         <tr>
+            <td>Course</td>
+            <td> <%= student.course  %> </td>
+        </tr>
+
+         <tr>
+            <td>Registration Date</td>
+             <td><%= dayjs(student.reg_date).format("DD-MM-YYYY") %></td>
+        </tr>
+
+         <tr>
+            <td>Mobile No.</td>
+            <td> <%= student.mno  %> </td>
+        </tr>
+
+        
+    </tbody>
+  </table>
+
+  <%- include('partials/footer.ejs') %>

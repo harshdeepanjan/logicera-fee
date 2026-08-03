@@ -1,0 +1,40 @@
+    <%- include('partials/header.ejs')  %>
+
+    <h2 style="text-align: center; color: red;">Defaulter Student List</h2>
+
+    <table style="text-align: center;">
+        <thead>
+            <th>Sno.</th>
+            <th>Roll No.</th>
+            <th>Course</th>
+            <th>Status</th>
+            <th>DOJ</th>
+            <th>Last Paid</th>
+            <th>OverDue Days</th>
+            <th>Actual Payment</th>
+            <th>Expected Payment</th>
+            <th>Missed Payment</th>
+        </thead>
+
+        <tbody>
+            <% let sno = 1 %>
+            <% onlyDefaulters.forEach(element => { %>
+                <tr>
+                    <td> <%= sno++ %> </td>
+                    <td> <%= element.name %> </td>
+                    <td> <%= element.course %> </td>
+                    <td>    <% let statusDisplay = element.status === "defaulter" ? "Active" : "Not Registered" %>
+                        
+                        <%= statusDisplay %> </td>
+                    <td> <%= dayjs(element.doj).format("DD-MMM-YYYY") %> </td>
+                    <td> <%= dayjs(element.lastExpectedPaymentDate).format("DD-MMM-YYYY") %> </td>
+                    <td id="overdueDays"> -<%= element.overdueDays %> </td>
+                    <td> <%= element.actualPayments %> </td>
+                    <td> <%= element.expectedPayments %> </td>
+                    <td> <%= element.missedPayments %> </td>
+                </tr>
+           <% }); %>
+        </tbody>
+    </table>
+
+    <%- include('partials/footer.ejs')  %>
